@@ -36,6 +36,7 @@
     "inversify": "^5.0.1",
     "kleur": "^4.0.2",
     "minimist": "^1.2.5",
+    "preserve-case": "^1.1.1",
     "reflect-metadata": "^0.1.13",
     "tslib": "^2.0.0"
   },
