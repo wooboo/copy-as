@@ -1,0 +1,28 @@
+# Common files
+.editorconfig
+.gitattributes
+.gitignore
+.vsts
+tsconfig.json
+.eslintrc.json
+
+# Log & Cache files
+.eslintcache
+
+# Build files
+lib/benchmark
+lib/tests
+lib/**/*.js.map
+lib/**/*.spec.{d.ts,js}
+
+# Editor directories
+.vscode
+
+# Other directories
+.tmp
+.benchmark
+.github
+fixtures
+src
+node_modules
+typings
