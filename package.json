@@ -1,6 +1,6 @@
 {
   "name": "@wooboo/cpas",
-  "version": "1.0.0-beta1",
+  "version": "1.0.0",
   "description": "Use your code as your templates",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
