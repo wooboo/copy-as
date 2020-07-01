@@ -65,7 +65,6 @@ export async function cli(argv: string[]) {
 
     replace.push({ from: element, to: answers[element] as string });
   }
-  console.log(replace);
   const source = path.resolve(params.source);
   const destination = path.resolve(params.destination);
 
