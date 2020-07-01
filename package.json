@@ -1,23 +1,25 @@
 {
   "name": "@wooboo/cpas",
-  "version": "1.0.0",
+  "version": "1.0.0-beta2",
   "description": "Use your code as your templates",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
-  "bin": "./bin.js",
-  "repository": "wooboo/copy-as",
+  "bin": {
+    "cpas": "./bin.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wooboo/copy-as.git"
+  },
   "preferGlobal": true,
   "scripts": {
     "start": "npm run build && npm run global",
-    "test": "npm run test:unit",
-    "test:unit": "mocha src/**/*.spec.ts",
     "build": "npm run clean:some && tsc -p .",
     "global": "npm i -g && cpas",
     "clean:some": "rimraf ./lib ./docs",
     "clean:all": "rimraf ./node_modules ./package-lock.json ./lib ./docs",
     "refresh": "npm run clean:all && npm install",
-    "publish-package": "npm run build && npm publish",
-    "docs": "typedoc --out docs ./src"
+    "publish-package": "npm run build && npm publish --access public"
   },
   "keywords": [
     "copy",
@@ -26,33 +28,26 @@
   "author": "Piotr Żabówka <wooboox@gmail.com> (https://pz-solutions.pl)",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^4.1.0",
-    "figlet": "^1.4.0",
-    "fs-extra": "^9.0.1",
-    "glob": "^7.1.6",
     "ignore": "^5.1.8",
     "inquirer": "^7.2.0",
-    "inquirer-file-selector-prompt": "^1.1.0",
-    "inquirer-file-tree-selection-prompt": "^1.0.6",
     "inquirer-fuzzy-path": "^2.3.0",
-    "inversify": "^5.0.1",
-    "kleur": "^4.0.2",
     "minimist": "^1.2.5",
     "preserve-case": "^1.1.1",
-    "reflect-metadata": "^0.1.13",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
-    "@liftr/tscov": "^1.4.7",
-    "@types/figlet": "^1.2.0",
-    "@types/fs-extra": "^9.0.1",
-    "@types/glob": "^7.1.2",
     "@types/inquirer": "^6.5.0",
     "@types/minimist": "^1.2.0",
     "@types/node": "^14.0.14",
     "rimraf": "^3.0.2",
-    "ts-node": "^8.10.2",
-    "typedoc": "^0.17.7",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.6"
+  },
+  "bugs": {
+    "url": "https://github.com/wooboo/copy-as/issues"
+  },
+  "homepage": "https://github.com/wooboo/copy-as#readme",
+  "directories": {
+    "example": "example",
+    "lib": "lib"
   }
 }

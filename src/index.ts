@@ -15,7 +15,11 @@ export async function cli(argv: string[]) {
 
   args.source = args._[0] || args.source;
   args.destination = args._[1] || args.destination;
-
+  var missingReplacements = (
+    (typeof args.replace === "string"
+      ? [args.replace]
+      : (args.replace as string[])) || []
+  ).filter((o) => o.indexOf("/") === -1);
   const answers = await inquirer.prompt([
     ...insertIf(!args.source, {
       type: "fuzzypath",
@@ -36,12 +40,16 @@ export async function cli(argv: string[]) {
       name: "replace",
       message: "replace pattern",
     }),
+    ...missingReplacements.map((r) => ({
+      type: "input",
+      name: r,
+      message: `replace '${r}' to`,
+    })),
   ]);
   const ignore =
     (typeof args.ignore === "string"
       ? [args.ignore]
       : (args.ignore as string[])) || [];
-  console.log(args.ignore);
   const params = { ...args, ...answers };
   const replace = (
     (typeof params.replace === "string"
@@ -49,8 +57,15 @@ export async function cli(argv: string[]) {
       : (params.replace as string[])) || []
   )
     .map((o: string) => o.split("/"))
+    .filter((o) => o[1])
     .map((o: string[]) => ({ from: o[0], to: o[1] }));
 
+  for (let index = 0; index < missingReplacements.length; index++) {
+    const element = missingReplacements[index];
+
+    replace.push({ from: element, to: answers[element] as string });
+  }
+  console.log(replace);
   const source = path.resolve(params.source);
   const destination = path.resolve(params.destination);
 
