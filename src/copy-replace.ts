@@ -7,15 +7,17 @@ export default async function copyReplace({
   destination,
   replace,
   ignore,
+  noPreserveCase,
 }: {
   source: string;
   destination: string;
   replace: Array<{ from: string; to: string }>;
   ignore: string[];
+  noPreserveCase: boolean;
 }) {
   const sourceStats = await fs.promises.stat(source);
   const sourceName = path.basename(source);
-  const newNem = rename(sourceName, replace);
+  const newNem = rename(sourceName, replace, noPreserveCase);
   const newDestination = path.join(destination, newNem);
   const ig = ignorer().add(ignore);
   if (sourceStats.isDirectory()) {
@@ -35,11 +37,12 @@ export default async function copyReplace({
         destination: newDestination,
         replace,
         ignore,
+        noPreserveCase,
       });
     }
   } else {
     console.log("file", source, newDestination);
     const content = await fs.promises.readFile(source, "utf8");
-    await fs.promises.writeFile(newDestination, rename(content, replace));
+    await fs.promises.writeFile(newDestination, rename(content, replace, noPreserveCase));
   }
 }

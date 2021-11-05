@@ -10,9 +10,10 @@ inquirer.registerPrompt("fuzzypath", inquirerFuzzyPath);
 export async function cli(argv: string[]) {
   const args = minimist(argv, {
     string: ["replace", "source", "destination", "ignore"],
+    boolean: ["preserve-case"],
     alias: { replace: "r", source: "s", destination: "d", ignore: "i" },
   });
-
+  // console.log("Args", args);
   args.source = args._[0] || args.source;
   args.destination = args._[1] || args.destination;
   var missingReplacements = (
@@ -88,6 +89,7 @@ export async function cli(argv: string[]) {
     destination: destination,
     replace: replace,
     ignore: [...ignores, ...ignore],
+    noPreserveCase: !args['preserve-case'],
   });
 }
 
